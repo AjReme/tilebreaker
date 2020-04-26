@@ -1,0 +1,5 @@
+build/*
+REPORT.md.backup
+README.md.backup
+BUILDING.md.backup
+subprojects/gudp/*

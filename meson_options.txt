@@ -1,0 +1,9 @@
+option(
+  'domain-type',
+  type: 'combo',
+  choices: [
+    'ipv4'
+  ],
+  value: 'ipv4',
+  description: 'Choose a type of netcode to compile.'
+)
