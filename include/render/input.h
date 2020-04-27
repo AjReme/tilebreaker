@@ -5,6 +5,7 @@ typedef enum {
   DOWN,
   LEFT,
   RIGHT,
+  NO_DIRECTION,
 } DIRECTION;
 
 char getch(void);

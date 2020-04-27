@@ -13,7 +13,7 @@
 #define ANSI_COLOR_RESET "\x1b[0m"
 
 #define CONSOLE_ROWS 23
-#define CONSOLE_COLS 79
+#define CONSOLE_COLS 78
 
 #define PLAYER_UNKNOWN "░"
 #define PLAYER_CAPTURING "▒"

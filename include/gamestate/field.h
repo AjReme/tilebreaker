@@ -4,7 +4,7 @@
 #include "render/input.h"
 
 #define MAX_PLAYERS 6
-#define FIELD_ROWS 100
+#define FIELD_ROWS 30
 #define FIELD_COLS 100
 
 typedef struct {
@@ -112,6 +112,9 @@ void FieldAssignUpdate(Field* field, DIRECTION* dirs) {
       }
       case RIGHT: {
         y++;
+        break;
+      }
+      case NO_DIRECTION: {
         break;
       }
     }

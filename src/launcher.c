@@ -104,7 +104,9 @@ void PackServerPacket(Response* response, DIRECTION* dirs) {
 }
 
 void UnpackServerPacket(Response* response, DIRECTION* dirs) {
-  memcpy(dirs, response->data.ptr + 1, MAX_PLAYERS * sizeof(DIRECTION));
+  for (int i = 0; i < MAX_PLAYERS; ++i) {
+    dirs[i] = (DIRECTION)response->data.ptr[1 + i];
+  }
 }
 
 void PackClientPacket(Response* response, DIRECTION dir) {
@@ -163,13 +165,13 @@ void Create(char* ip, char* port) {
         break;
       }
     }
-    printf("Player %d coordinates: %d %d\n", i, players[i].x, players[i].y);
+    printf("Player %d coordinates: %d %d.\n", i, players[i].x, players[i].y);
   }
 
   PackServerStart(&response, players);
   ServerSend(&server, &response);
   DIRECTION dirs[MAX_PLAYERS];
-  memset(dirs, UP, MAX_PLAYERS * sizeof(DIRECTION));
+  memset(dirs, NO_DIRECTION, MAX_PLAYERS * sizeof(DIRECTION));
 
   puts("Game started.");
   fflush(stdout);
@@ -184,6 +186,11 @@ void Create(char* ip, char* port) {
         UnpackClientPacket(&response, &dirs[response.client_id]);
       }
     }
+    /*puts("Sending packet:");
+    for (int i = 0; i < MAX_PLAYERS; ++i) {
+      printf("%d ", (char)dirs[i]);
+    }
+    puts("\n");*/
     PackServerPacket(&response, dirs);
     ServerSend(&server, &response);
   }
@@ -198,7 +205,7 @@ void Play(Client* client, int id) {
   EXPECT(ResponseInit(&response));
   field.my_id = id;
 
-  volatile DIRECTION dir = UP;
+  volatile DIRECTION dir = NO_DIRECTION;
   pthread_t thread;
   pthread_create(&thread, NULL, InputGetter, &dir);
 
@@ -212,6 +219,11 @@ void Play(Client* client, int id) {
     PackClientPacket(&response, dir);
     EXPECT(ClientSend(client, &response));
     EXPECT(ClientReceive(client, &response));
+    /*puts("received packet:");
+    for (int i = 0; i < MAX_PLAYERS; ++i) {
+      printf("%d ", dirs[i]);
+    }
+    puts("\n");*/
     UnpackServerPacket(&response, dirs);
     FieldAssignUpdate(&field, dirs);
     if (field.players[id].x == -1 || field.players[id].y == -1) {
@@ -220,8 +232,6 @@ void Play(Client* client, int id) {
     ConsoleOutputFieldDraw(&out, &field);
     ConsoleOutputShow(&out);
   }
-
-  pthread_join(thread, NULL);
 }
 
 void Connect(char* ip, char* port) {

@@ -107,4 +107,11 @@ void ConsoleOutputFieldDraw(ConsoleOutput* out, Field* field) {
       }
     }
   }
+  for (int i = 0; i < MAX_PLAYERS; ++i) {
+    if (xlim_min <= field->players[i].x && field->players[i].x < xlim_max &&
+        ylim_min <= field->players[i].y && field->players[i].y < ylim_max) {
+      ConsoleOutputSetSymbol(out, field->players[i].x - xlim_min,
+                             field->players[i].y - ylim_min, PLAYER_SYMBOL);
+    }
+  }
 }
