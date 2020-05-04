@@ -239,7 +239,7 @@ void Connect(char* ip, char* port) {
   RAII(ClientDestroy) Client client;
   RAII(ResponseDestroy) Response response;
   EXPECT(AddressInit(&addr, ip, atoi(port)));
-  EXPECT(ClientInit(&client, &addr) == SOCKET_CONNECT);
+  EXPECT(ClientInit(&client, &addr));
   EXPECT(ResponseInit(&response));
   PackLobbyConnect(&response);
   EXPECT(ClientSend(&client, &response));
