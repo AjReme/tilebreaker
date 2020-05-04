@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #include "client/client.h"
 #include "common/macro.h"
@@ -13,6 +14,9 @@
 void INTERNAL(RETCODE code, int line) {
   if (code != SUCCESS) {
     fprintf(stderr, "Errored in line %d: %d\n", line, code);
+    if (errno) {
+      perror("System error"); 
+    }
     fflush(stderr);
     exit(1);
   }
