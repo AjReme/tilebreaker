@@ -1,10 +1,10 @@
-#include "render/console.h"
+#include "render/render.h"
 
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
-#include "gamestate/field.h"
+#include "gamestate/gamestate.h"
 
 static char* GetColor(int id) {
   switch (id) {

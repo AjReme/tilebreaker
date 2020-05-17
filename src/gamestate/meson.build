@@ -1,7 +1,6 @@
-
-field = files('field.c')
-field_lib = static_library(
-  'field',
-  field,
+gamestate = files('gamestate.c')
+gamestate_lib = static_library(
+  'gamestate',
+  gamestate,
   include_directories : inc
 )

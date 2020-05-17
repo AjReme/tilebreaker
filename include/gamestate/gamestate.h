@@ -1,6 +1,6 @@
 #pragma once
 
-#include "render/input.h"
+#include "gameresponse/input.h"
 
 #define MAX_PLAYERS 6
 #define FIELD_ROWS 30
@@ -29,3 +29,5 @@ void FieldDestroy(Field* field);
 void FieldInitPlayers(Field* field);
 
 void FieldAssignUpdate(Field* field, DIRECTION* dirs);
+
+int FieldAllDead(Field* field);

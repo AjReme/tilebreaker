@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd ..
-mkdir "bin"
+mkdir -p "bin"
 cp "build/src/TileBreaker" "bin/"

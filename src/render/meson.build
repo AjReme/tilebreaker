@@ -1,13 +1,6 @@
-console = files('console.c')
-console_lib = static_library(
-  'console',
-  console,
-  include_directories : inc
-)
-
-input = files('input.c')
-input_lib = static_library(
-  'input',
-  input,
+render = files('render.c')
+render_lib = static_library(
+  'render',
+  render,
   include_directories : inc
 )

@@ -1,7 +1,9 @@
-#include "gamestate/field.h"
+#include "gamestate/gamestate.h"
 
+#include <stdio.h>
+
+#include "gameresponse/input.h"
 #include "networking/packet.h"
-#include "render/input.h"
 
 #define MAX_PLAYERS 6
 #define FIELD_ROWS 30
@@ -108,4 +110,13 @@ void FieldAssignUpdate(Field* field, DIRECTION* dirs) {
       FieldMovePlayer(field, x, y, i);
     }
   }
+}
+
+int FieldAllDead(Field* field) {
+  for (int i = 0; i < MAX_PLAYERS; ++i) {
+    if (field->players[i].x != -1 || field->players[i].y != -1) {
+      return 0;
+    }
+  }
+  return 1;
 }

@@ -9,7 +9,7 @@ Simply run the following script:
 ```
 $ meson build
 $ ninja -C build
-$ ninja -C install
+$ ninja -C build install
 ```
 
 After that, in folder `bin` you'll find game launcher called TileBreaker.
@@ -17,15 +17,15 @@ After that, in folder `bin` you'll find game launcher called TileBreaker.
 ## Using the launcher
 
 * For help, type
-`$ TileBreaker help`
+`$ ./TileBreaker help`
 
 * For creating server, type
-`$ TileBreaker create {Port} {Players number}`.
+`$ ./TileBreaker create [Port] [Players number]`.
 For example, command
-`$ TileBreaker create 53645 6`.
+`$ ./TileBreaker create 53645 6`.
 Will create game in port 53645 and for 6 players.
 
 * For connecting, type
-`$ TileBreaker create {IP} {Port}`.
+`$ ./TileBreaker create [IP] [Port]`.
 Example:
-`$ TileBreaker create localhost 53645`.
+`$ ./TileBreaker create localhost 53645`.
