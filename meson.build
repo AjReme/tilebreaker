@@ -42,5 +42,6 @@ inc = [
 add_project_arguments(defines, language: 'c')
 thread_dep = dependency('threads')
 
-
 subdir('src')
+
+meson.add_install_script('install.sh')

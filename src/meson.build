@@ -1,13 +1,14 @@
 subdir('render')
-subdir('gameserver')
+subdir('gamestate')
 
 launcher = files('launcher.c')
 launcher_exe = executable(
-  'game_launcher',
+  'TileBreaker',
   launcher,
   link_with: [
     console_lib,
-    input_lib
+    input_lib,
+    field_lib
   ],
   dependencies: [
     gudp,

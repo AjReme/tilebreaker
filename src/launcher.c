@@ -1,9 +1,9 @@
+#include <errno.h>
 #include <math.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
 
 #include "client/client.h"
 #include "common/macro.h"
@@ -15,7 +15,7 @@ void INTERNAL(RETCODE code, int line) {
   if (code != SUCCESS) {
     fprintf(stderr, "Errored in line %d: %d\n", line, code);
     if (errno) {
-      perror("System error"); 
+      perror("System error");
     }
     fflush(stderr);
     exit(1);
@@ -190,11 +190,6 @@ void Create(char* ip, char* port) {
         UnpackClientPacket(&response, &dirs[response.client_id]);
       }
     }
-    /*puts("Sending packet:");
-    for (int i = 0; i < MAX_PLAYERS; ++i) {
-      printf("%d ", (char)dirs[i]);
-    }
-    puts("\n");*/
     PackServerPacket(&response, dirs);
     ServerSend(&server, &response);
   }
@@ -223,11 +218,6 @@ void Play(Client* client, int id) {
     PackClientPacket(&response, dir);
     EXPECT(ClientSend(client, &response));
     EXPECT(ClientReceive(client, &response));
-    /*puts("received packet:");
-    for (int i = 0; i < MAX_PLAYERS; ++i) {
-      printf("%d ", dirs[i]);
-    }
-    puts("\n");*/
     UnpackServerPacket(&response, dirs);
     FieldAssignUpdate(&field, dirs);
     if (field.players[id].x == -1 || field.players[id].y == -1) {
